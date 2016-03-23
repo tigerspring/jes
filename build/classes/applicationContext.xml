@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.2.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="jdbcUrl"
+			value="jdbc:sqlserver://localhost:1433;databaseName=MESDB" />
+		<property name="user" value="sa" />
+		<property name="password" value="wtt_jxf_2728" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/jes/wms/web/beans/Staff.hbm.xml</value>
+				<value>com/jes/wms/web/beans/Unit.hbm.xml</value>
+				<value>com/jes/wms/web/beans/Group.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+
+		<property name="transactionManager" ref="transactionManager"></property>
+		<property name="transactionAttributes">
+
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="change*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>staffService</value>
+				<value>baseService</value>
+				<value>unitService</value>
+				<value>groupService</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 根Service -->
+	<bean id="baseService" abstract="true" class="com.jes.wms.service.impl.BaseImpl">
+	</bean>
+	<bean id="staffService" class="com.jes.wms.service.impl.StaffImpl" parent="baseService">
+		<property name="staffDao">
+			<ref local="staffDao" />
+		</property>
+	</bean>
+	<bean id="unitService" class="com.jes.wms.service.impl.UnitImpl" parent="baseService">
+	    <property name="unitDao">
+			<ref local="unitDao" />
+		</property>
+	</bean>
+	<bean id="groupService" class="com.jes.wms.service.impl.GroupImpl" parent="baseService">
+	    <property name="groupDao">
+			<ref local="groupDao" />
+		</property>
+	</bean>
+	<!-- 根DAO -->
+	<bean id="baseDao" class="com.jes.wms.dao.impl.BaseDao" abstract="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="staffDao" class="com.jes.wms.dao.impl.StaffDao" parent="baseDao" />	
+	<bean id="unitDao" class="com.jes.wms.dao.impl.UnitDao" parent="baseDao" />	
+	<bean id="groupDao" class="com.jes.wms.dao.impl.GroupDao" parent="baseDao" />
+	
+	<bean id="LoginAction" class="com.jes.wms.web.action.LoginAction">
+		<property name="staffService">
+		    <ref local="staffService"></ref>
+		</property>
+	</bean>
+
+	<bean id="ListUnitsAction" class="com.jes.wms.web.action.ListUnitsAction" >
+		<property name="unitService">
+		    <ref local="unitService"></ref>
+		</property>
+	</bean>
+	<bean id="ListGroupsAction" class="com.jes.wms.web.action.ListGroupsAction">
+		<property name="groupService">
+		    <ref local="groupService" />
+		</property> 
+	</bean>
+	<bean id="ListStaffsAction" class="com.jes.wms.web.action.ListStaffsAction">
+		<property name="staffService">
+		    <ref local="staffService" />
+		</property> 
+	</bean>
+</beans>
+
+

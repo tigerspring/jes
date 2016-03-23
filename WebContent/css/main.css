@@ -1,0 +1,42 @@
+/* #wrap{   */
+/*     width:100%;   */
+/*     margin:0 auto;   */
+/* }   */
+#header{  
+    height:15%;  
+    width: 100%;
+}  
+#container{  
+    position:relative;  
+    height:90%;
+    width: 100%; 
+}  
+#left_side{  
+    position:relative;  
+    top:0px;  
+    left:0px;  
+    width:15%;  
+    height:50%;  
+}
+#content{  
+	position:absolute;
+	top: 0px;
+	left: 0px; 
+    margin:0px 16% ;
+    height:100%; 
+    width: 84%; 
+    
+}
+#qxgl {margin:0 auto; width:100%;}
+#qxglleft { float:left; width:70%; height:100%;}
+#qxglright { float:right; width:30%; height:100%;}
+
+#qxglgn { float:left; width:49.5%; height:100%;}
+#qxglqx { float:right; width:49.5%; height:100%;}
+
+#qxglgn1 { float:left; width:30%; height:100%;}
+#qxglqx2 { float:right; width:30%; height:100%;}
+#middle { float:left; width:30%; height:100%;}
+
+#ckyhleft { float:left; width:30%; height:100%;}
+#ckyhright { float:right; width:70%; height:100%;}

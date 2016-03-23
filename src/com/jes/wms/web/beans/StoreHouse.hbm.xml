@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-27 9:30:55 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.jes.wms.web.beans.StoreHouse" table="STOREHOUSE">
+        <id name="iKey" type="java.lang.Integer" access="field">
+            <column name="IKEY" />
+            <generator class="native" />
+        </id>
+        <property name="warehouse_Ikey" type="java.lang.Integer">
+            <column name="WAREHOUSE_IKEY"  not-null="false" length="32" />
+        </property>
+        <property name="code" type="java.lang.String">
+            <column name="CODE"  not-null="false" length="32" />
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="NAME"  not-null="false" length="32" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION"  not-null="false" length="32" />
+        </property>
+        <property name="status" type="java.lang.Boolean">
+            <column name="STATUS"  not-null="false" length="1" />
+        </property>
+        <property name="org" type="java.lang.String">
+            <column name="ORG"  not-null="false" length="32" />
+        </property>
+        <property name="createBy" type="java.lang.String">
+            <column name="CREATEBY"  not-null="false" length="32" />
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATEDATE"  not-null="false" />
+        </property>
+        <property name="updateBy" type="java.lang.String">
+            <column name="UPDATEBY"  not-null="false" length="32" />
+        </property>
+        <property name="updateDate" type="java.util.Date">
+            <column name="UPDATEDATE"  not-null="false" />
+        </property>
+        <property name="max_Qty" type="java.lang.Integer">
+            <column name="MAX_QTY"  not-null="false" length="32" />
+        </property>
+        <property name="priority_Level" type="java.lang.String">
+            <column name="PRIORITY_LEVEL"  not-null="false" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

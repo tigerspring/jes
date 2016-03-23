@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping
+PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.jes.wms.web.beans">
+	<class name="Unit" table="SYS_UNIT">
+		<id name="iKey" column="IKey" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="unit" type="string" column="Unit"
+			not-null="false" length="32" />			
+		<property name="unitcode" type="string" column="UnitCode"
+			not-null="false" length="32" />
+		<property name="unitdescription" type="string" column="UnitDescription"
+			not-null="false" length="32" />
+		<property name="status" type="boolean" column="Status"
+			not-null="false" length="1" />
+		<property name="org" type="string" column="Org" not-null="false"
+			length="32" />
+		<property name="createBy" type="string" column="Create_By"
+			not-null="false" length="32" />
+		<property name="createDate" type="date" column="Create_Date"
+			not-null="false" />
+		<property name="updateBy" type="string" column="Update_By"
+			not-null="false" length="32" />
+		<property name="updateDate" type="date" column="Update_Date"
+			not-null="false" />
+		<property name="isOutline" type="boolean" column="Out_line"
+			not-null="false" length="1" />
+	</class>
+</hibernate-mapping>

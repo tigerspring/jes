@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" /> 
+	<package name="wms" extends="struts-default" namespace="/">
+		<action name="login" class="com.jes.wms.web.action.LoginAction">
+			<result name="success">${basePath}/${#session.model}/index.jsp</result>
+			<result name="error">/Register.jsp</result>
+		</action>
+
+	</package>
+	<package name="json1" extends="json-default" namespace="/json1">
+		<action name="listUnits" class="com.jes.wms.web.action.ListUnitsAction" method="listUnits">
+			<result name="success" type="json">
+				<param name="includeProperties">^gridModel\[\d+\]\.w+,rows,page,total,record</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="updateUnits_*" class="com.jes.wms.web.action.ListUnitsAction" method="{1}">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+	</package>
+    <!-- 群组begin -->
+    <package name="sysGroup" extends="json-default" namespace="/sysGroup">
+		<action name="listGroups" class="com.jes.wms.web.action.ListGroupsAction" method="listGroups">
+			<result name="success" type="json">
+				<param name="includeProperties">^gridModel\[\d+\]\.w+,rows,page,total,record</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="updateGroups_*" class="com.jes.wms.web.action.ListGroupsAction" method="{1}">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+	</package>
+	<!-- 群组end -->
+	<!-- 员工begin -->
+	<package name="sysStaff" extends="json-default" namespace="/sysStaff">
+		<action name="listStaffs" class="com.jes.wms.web.action.ListStaffsAction" method="listStaffs">
+			<result name="success" type="json">
+				<param name="includeProperties">^gridModel\[\d+\]\.w+,rows,page,total,record</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="updateStaffs_*" class="com.jes.wms.web.action.ListStaffsAction" method="{1}">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+	</package>
+	<!-- 员工end -->
+</struts>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-26 23:35:08 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.jes.wms.web.beans.Group_Staff" table="GROUP_STAFF">
+        <id name="iKey" type="java.lang.Integer" access="field">
+            <column name="IKEY" />
+            <generator class="assigned" />
+        </id>
+        <property name="staff_iKey" type="java.lang.Integer">
+            <column name="STAFF_IKEY" not-null="false" length="32" />
+        </property>
+        <property name="group_iKey" type="java.lang.Integer">
+            <column name="GROUP_IKEY"  not-null="false" length="32" />
+        </property>
+        <property name="status" type="java.lang.Boolean">
+            <column name="STATUS"  not-null="false" length="1" />
+        </property>
+        <property name="org" type="java.lang.String">
+            <column name="Org" not-null="false" length="32"  />
+        </property>
+        <property name="createBy" type="java.lang.String">
+            <column name="CREATEBY"  not-null="false" length="32" />
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATEDATE"  not-null="false" />
+        </property>
+        <property name="updateBy" type="java.lang.String">
+            <column name="UPDATEBY"  not-null="false" length="32" />
+        </property>
+        <property name="updateDate" type="java.util.Date">
+            <column name="UPDATEDATE"  not-null="false" />
+        </property>
+    </class>
+</hibernate-mapping>
